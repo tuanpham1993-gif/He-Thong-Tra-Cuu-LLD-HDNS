@@ -1,0 +1,129 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  --accent-gradient: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+  --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  --warning-gradient: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
+  --bg-main: #f4f7fb;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --card-border-radius: 16px;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-main);
+  color: #2c3e50;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.custom-navbar {
+  background: var(--primary-gradient);
+  box-shadow: 0 4px 20px rgba(30, 60, 114, 0.25);
+  padding: 0.8rem 1.5rem;
+}
+
+.brand-badge {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+/* Cards & Panels */
+.custom-card {
+  background: #ffffff;
+  border-radius: var(--card-border-radius);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.custom-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.09);
+}
+
+.card-header-gradient {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  padding: 1rem 1.25rem;
+  border-bottom: none;
+}
+
+/* Custom Badges */
+.badge-score {
+  background: #eef2ff;
+  color: #3730a3;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #c7d2fe;
+}
+
+.badge-meta {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+/* Form controls */
+.form-control-custom, .form-select-custom {
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.form-control-custom:focus, .form-select-custom:focus {
+  border-color: #2a5298;
+  box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.12);
+}
+
+.btn-primary-custom {
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-custom:hover {
+  opacity: 0.92;
+  transform: scale(1.01);
+}
+
+/* Hallucination Warning Card */
+.hallucination-card {
+  border-left: 5px solid #ff5e62;
+  background: #fff5f5;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* Source Node Accordion */
+.source-card {
+  border-left: 4px solid #0083b0;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
