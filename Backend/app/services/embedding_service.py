@@ -8,11 +8,21 @@ from app.services.indexing_service import indexing_service, get_embedding_model
 from app.models.schemas import EmbeddingMetrics, EmbeddingCompareResponse
 
 class EmbeddingService:
+    """
+    Dịch vụ thực nghiệm Task 5: Embedding Model Comparison
+    So sánh hiệu năng giữa 2 mô hình biểu diễn véc-tơ ngữ nghĩa:
+    1. sentence-transformers/all-MiniLM-L6-v2 (Mặc định)
+    2. BAAI/bge-small-en-v1.5 (Nâng cao)
+    """
     def compare_embedding_models(
         self,
         query: str = "Nữ lao động sinh con được nghỉ chế độ thai sản bao lâu?",
         models: List[str] = None
     ) -> EmbeddingCompareResponse:
+        """
+        Thực hiện tạo Vector Index với từng mô hình nhúng, đo lường số chiều vector (Dimension),
+        thời gian Indexing, thời gian Retrieval (Latency) và điểm tương đồng Cosine Similarity.
+        """
         if models is None:
             models = [
                 "sentence-transformers/all-MiniLM-L6-v2",
@@ -25,18 +35,19 @@ class EmbeddingService:
         for model_name in models:
             logger.info(f"Bắt đầu thực nghiệm Task 5 với Embedding Model: {model_name}")
             
-            # 1. Đo thời gian Indexing
+            # 1. Khởi tạo mô hình nhúng và đo thời gian nhúng dữ liệu (Indexing Time)
             idx_start = time.time()
             embed_model = get_embedding_model(model_name)
             
-            # Test lấy dimension của vector embedding
+            # Kiểm tra số chiều véc-tơ (Vector Dimension, ví dụ: 384)
             dummy_vec = embed_model.get_text_embedding("Luật lao động 2019")
             dimension = len(dummy_vec)
             
+            # Xây dựng Vector Index tức thời cho mô hình đang thực nghiệm
             index = VectorStoreIndex.from_documents(documents, embed_model=embed_model)
             indexing_time_ms = (time.time() - idx_start) * 1000
 
-            # 2. Đo thời gian Retrieval & Similarity Score
+            # 2. Đo thời gian truy vấn (Retrieval Latency) & Điểm tương đồng Similarity Score
             ret_start = time.time()
             retriever = index.as_retriever(similarity_top_k=2)
             retrieved_nodes = retriever.retrieve(query)
@@ -48,6 +59,7 @@ class EmbeddingService:
                 top_score = round(float(retrieved_nodes[0].score or 0.0), 4)
                 top_text = retrieved_nodes[0].node.get_content()
 
+            # Đóng gói chỉ số đo lường hiệu năng
             results.append(
                 EmbeddingMetrics(
                     model_name=model_name,
@@ -59,6 +71,7 @@ class EmbeddingService:
                 )
             )
 
+        # Khuyến nghị kết luận bài báo cáo học thuật
         recommendation = (
             "Khuyến nghị chuyên môn cho Hệ thống Tra cứu Luật Lao động:\n"
             "- Mô hình `BAAI/bge-small-en-v1.5` cho điểm Similarity Score cao hơn và khả năng bắt ngữ nghĩa pháp lý chính xác hơn.\n"
@@ -71,4 +84,5 @@ class EmbeddingService:
             recommendation=recommendation
         )
 
+# Singleton Instance của EmbeddingService
 embedding_service = EmbeddingService()
