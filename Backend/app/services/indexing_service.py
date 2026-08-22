@@ -2,9 +2,13 @@ import os
 import json
 import time
 from typing import List, Dict, Any, Tuple
+# pyrefly: ignore [missing-import]
 import chromadb
+# pyrefly: ignore [missing-import]
 from llama_index.core import Document, VectorStoreIndex, StorageContext, Settings as LlamaSettings
+# pyrefly: ignore [missing-import]
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+# pyrefly: ignore [missing-import]
 from llama_index.vector_stores.chroma import ChromaVectorStore
 
 from app.config import settings

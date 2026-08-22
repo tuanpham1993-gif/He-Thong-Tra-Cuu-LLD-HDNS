@@ -1,6 +1,8 @@
 import time
 from typing import List
+# pyrefly: ignore [missing-import]
 from llama_index.core import Document, VectorStoreIndex
+# pyrefly: ignore [missing-import]
 from llama_index.core.node_parser import SentenceSplitter
 
 from app.config import settings

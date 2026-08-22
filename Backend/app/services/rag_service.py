@@ -1,6 +1,8 @@
 import time
 from typing import List, Dict, Any, Tuple, Optional
+# pyrefly: ignore [missing-import]
 from llama_index.core import VectorStoreIndex, QueryBundle
+# pyrefly: ignore [missing-import]
 from llama_index.core.vector_stores.types import MetadataFilters, ExactMatchFilter, MetadataFilter
 
 from app.config import settings

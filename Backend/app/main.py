@@ -26,10 +26,10 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Cấu hình CORS cho phép Frontend ReactJS gọi API
+# Cấu hình CORS cho phép mọi nguồn (Origin) từ Frontend gọi API không bị chặn
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

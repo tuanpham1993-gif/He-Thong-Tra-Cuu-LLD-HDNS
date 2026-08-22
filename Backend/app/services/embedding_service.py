@@ -1,5 +1,6 @@
 import time
 from typing import List
+# pyrefly: ignore [missing-import]
 from llama_index.core import VectorStoreIndex
 
 from app.config import settings
@@ -47,7 +48,7 @@ class EmbeddingService:
             index = VectorStoreIndex.from_documents(documents, embed_model=embed_model)
             indexing_time_ms = (time.time() - idx_start) * 1000
 
-            # 2. Đo thời gian truy vấn (Retrieval Latency) & Điểm tương đồng Similarity Score
+            # 2. Đo thời gian Retrieval & Similarity Score
             ret_start = time.time()
             retriever = index.as_retriever(similarity_top_k=2)
             retrieved_nodes = retriever.retrieve(query)
